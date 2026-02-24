@@ -10,7 +10,7 @@ Implements the training loop for cGAN on CIFAR-10 dataset
 
 import os
 import sys
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 import numpy as np
 import torch
@@ -18,7 +18,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 # Import cGAN models
-from cgan import ConditionalDiscriminator, ConditionalGenerator
+from models.cgan import ConditionalDiscriminator, ConditionalGenerator
 from torch.utils.data import DataLoader
 
 

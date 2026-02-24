@@ -511,7 +511,7 @@ class ComparisonTrainer:
                     f"D Loss: {avg_d_loss:.4f} | G Loss: {avg_g_loss:.4f}"
                 )
 
-        print(f"✓ Training complete for {trainer.name}\n")
+        print(f" Training complete for {trainer.name}\n")
 
         return {
             "d_losses": trainer.d_losses,
@@ -577,13 +577,13 @@ class ComparisonTrainer:
             metrics.items(), key=lambda x: abs(x[1]["avg_d_loss"] - 0.5)
         )
 
-        print(f"\n✓ Best D Loss Stability: {best_d_stability[0]}")
+        print(f"\n Best D Loss Stability: {best_d_stability[0]}")
         print(f"  Std Dev: {best_d_stability[1]['std_d_loss']:.4f}")
 
-        print(f"\n✓ Best G Loss Stability: {best_g_stability[0]}")
+        print(f"\n Best G Loss Stability: {best_g_stability[0]}")
         print(f"  Std Dev: {best_g_stability[1]['std_g_loss']:.4f}")
 
-        print(f"\n✓ Best D Loss Balance (closest to 0.5): {best_d_balance[0]}")
+        print(f"\n Best D Loss Balance (closest to 0.5): {best_d_balance[0]}")
         print(f"  Average D Loss: {best_d_balance[1]['avg_d_loss']:.4f}")
 
         print("\n" + "=" * 80)

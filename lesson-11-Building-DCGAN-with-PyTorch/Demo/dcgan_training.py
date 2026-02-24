@@ -17,7 +17,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 # Import DCGAN models
-from dcgan import DCGANDiscriminator, DCGANGenerator
+from models.dcgan import DCGANDiscriminator, DCGANGenerator
 from torch.utils.data import DataLoader
 
 
@@ -195,7 +195,7 @@ class DCGANTrainer:
                 avg_d_loss = np.mean(self.d_losses[-len(train_loader) :])
                 avg_g_loss = np.mean(self.g_losses[-len(train_loader) :])
                 print(
-                    f"\n✓ Epoch {epoch+1} Complete - "
+                    f"\n Epoch {epoch+1} Complete - "
                     f"Avg D_loss: {avg_d_loss:.4f} | "
                     f"Avg G_loss: {avg_g_loss:.4f}\n"
                 )
@@ -239,36 +239,3 @@ def initialize_weights(model: nn.Module):
         elif isinstance(m, nn.BatchNorm2d):
             nn.init.normal_(m.weight, mean=1.0, std=0.02)
             nn.init.constant_(m.bias, 0.0)
-
-
-if __name__ == "__main__":
-    # Example usage
-    from dcgan import create_dcgan_models
-
-    # Determine device
-    if torch.backends.mps.is_available():
-        device = torch.device("mps")
-    elif torch.cuda.is_available():
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
-
-    print(f"Using device: {device}")
-
-    # Create models
-    generator, discriminator = create_dcgan_models(
-        latent_dim=100, num_channels=3, device=device
-    )
-
-    # Initialize weights
-    initialize_weights(generator)
-    initialize_weights(discriminator)
-
-    # Create trainer
-    trainer = DCGANTrainer(
-        generator=generator,
-        discriminator=discriminator,
-        device=device,
-    )
-
-    print("✓ DCGAN Trainer initialized successfully!")

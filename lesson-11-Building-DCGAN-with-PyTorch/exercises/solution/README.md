@@ -30,11 +30,6 @@ Plots both D and G losses with styling and reference lines.
 ### Section 7: Image Generation
 Generates 32 synthetic images and displays in grid format.
 
-### Section 8: Real vs Generated Comparison
-Side-by-side visualization of real and generated images.
-
-### Section 9: Statistics Computation
-Calculates mean, std, min, max for loss analysis.
 
 
 ## Key Implementation Details
