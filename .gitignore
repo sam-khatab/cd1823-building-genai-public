@@ -1,1 +1,8 @@
 lesson-11-Building-DCGAN-with-PyTorch/exercises/starter/data/
+lesson-13-Implementing-Conditional-GAN/exercises/starter/data/
+lesson-16-Implementing-Simple-Diffusion-Model/exercises/starter/data/
+project/data/
+project/checkpoints/
+__pycache__/
+*.pyc
+*.pyo

@@ -54,10 +54,10 @@ def train_cgan(
         # Save checkpoint every 10 epochs
         if (epoch + 1) % 10 == 0:
             torch.save(
-                generator.state_dict(), f"../pytorch-docker-env/checkpoints{epoch+1}.pt"
+                generator.state_dict(), f"../saved_models/checkpoints{epoch+1}.pt"
             )
             torch.save(
                 discriminator.state_dict(),
-                f"../pytorch-docker-env/checkpoints{epoch+1}.pt",
+                f"../saved_models/checkpoints{epoch+1}.pt",
             )
             print(f"Saved checkpoints at epoch {epoch+1}")
