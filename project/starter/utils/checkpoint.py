@@ -24,8 +24,25 @@ def save_checkpoint(model, optimizer=None, epoch=None, loss=None, name="model", 
 
 def load_checkpoint(model, optimizer=None, path=None, map_location="cpu"):
     checkpoint = torch.load(path, map_location=map_location)
-    model.load_state_dict(checkpoint["model_state"])
-    if optimizer and "optimizer_state" in checkpoint:
-        optimizer.load_state_dict(checkpoint["optimizer_state"])
+    
+    # Handle different checkpoint formats
+    if isinstance(checkpoint, dict):
+        if "model_state" in checkpoint:
+            # Format: {"model_state": {...}, "optimizer_state": {...}, ...}
+            model.load_state_dict(checkpoint["model_state"])
+            if optimizer and "optimizer_state" in checkpoint:
+                optimizer.load_state_dict(checkpoint["optimizer_state"])
+        elif "state_dict" in checkpoint:
+            # Alternative format: {"state_dict": {...}}
+            model.load_state_dict(checkpoint["state_dict"])
+            if optimizer and "optimizer_state" in checkpoint:
+                optimizer.load_state_dict(checkpoint["optimizer_state"])
+        else:
+            # Assume the entire dict is the model state_dict
+            model.load_state_dict(checkpoint)
+    else:
+        # Checkpoint is directly the state_dict
+        model.load_state_dict(checkpoint)
+    
     print(f"Loaded model weights from {path}")
     return model
